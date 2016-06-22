@@ -22,7 +22,8 @@ Contains definitions used with binSets.
 Will be expanded to inculde definitions useful to other parts of the program
 	i.e.: #define BIT1 0x01
 
-
+sdpPinout.h:
+Contains the pin information of the arm processor.
 
 compilation:
 make: currently compiles test.c (along with any dependencies that need updating)
