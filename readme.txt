@@ -32,7 +32,3 @@ make clean: deletes all object files, executables and test text files,
 	on Windows make clean is tested and deletes files.
 	make clean is untested with Linux and currently only displays all files instead of deleting;
 	see Makefile on directions on how to change it once it is tested.
-
-make currently requires a folder named bin in the same directory. It will fail if it does not.
-I will eventually fix this, but for now create this folder yourself.
-

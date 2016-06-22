@@ -13,6 +13,12 @@ OBJ = $(patsubst %, $(ODIR)/%,$(_OBJ))
 #flag that tells the compiler where to look for .h files:
 IDIR = -I$(SDIR)
 
+ifneq ("$(wildcard $(ODIR))","")
+ODIR_CREATE = 
+else
+ODIR_CREATE = mkdir $(ODIR)
+endif
+
 #detects the opperating system
 ifeq ($(OS),Windows_NT)
 	RMprefix=del /S /Q /F
@@ -21,7 +27,8 @@ else
 	RMprefix=find . -name  
 	RMappend=-type f
 	#TODO: test and add "-delete" flag at end
-endif 
+endif
+
 
 #edit to change the default target; typing "make" will run this:
 default: test
@@ -31,8 +38,13 @@ default: test
 #target that lists all of the object files library files, "make lib" runs this:
 lib: $(OBJ)
 
+.PHONY: $(ODIR)
+$(ODIR): 
+	$(ODIR_CREATE)
+
+
 #target that comiles a signle object files, called by lib
-$(ODIR)/%.o: $(SDIR)/%.c $(SDIR)/%.h
+$(ODIR)/%.o: $(SDIR)/%.c $(SDIR)/%.h | $(ODIR)
 	$(CC) -c $< -o $@ $(CFLAGS)
 
 #causes "make clean" to work even if there is a file called "clean"
@@ -42,7 +54,7 @@ $(ODIR)/%.o: $(SDIR)/%.c $(SDIR)/%.h
 clean:
 	$(RMprefix) *.o $(RMappend)
 	$(RMprefix) *.exe $(RMappend)
-	$(RMprefix) .\bin\*.txt $(RMappend)
+	$(RMprefix) $(ODIR)\*.txt $(RMappend)
 
 #if any string is feed to makefile, or is the prerequisite of default and does not
 #follow the above target syntax it will run the following
