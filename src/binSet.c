@@ -52,7 +52,7 @@ int isPathValid(unsigned int *path, unsigned int pathSize) {
 			return 0; //state invalid
 		}
 	}
-	return 1; //state is valid
+	return 1; //path is valid
 }
 
 int pathCompare(const void *path1, const void *path2) {

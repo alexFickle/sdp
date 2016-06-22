@@ -2,7 +2,7 @@ See headerfiles for function declarations and full documentaion
 
 binSet:
 A binSet is a unsigned integer array that contains all of the information needed to sort a stack of cards.
-binSet.c/.h contains functions used to create this binSet
+binSet.c/.h contains functions used to create (but not use) this binSet
 This code is inteneded to be ran only on the pi.
 The only function that will be needed on the final project is constructBinSet( unsiged integer numCards)
 	which returns an unsigned integer pointer to a binSet for numCards cards
