@@ -32,3 +32,5 @@ make clean: deletes all object files, executables and test text files,
 	on Windows make clean is tested and deletes files.
 	make clean is untested with Linux and currently only displays all files instead of deleting;
 	see Makefile on directions on how to change it once it is tested.
+"target=arm" can be appended to any command to compile the target into a hex file that can be uploaded
+	to the cortex m0 using arm-none-eabi-gcc from https://launchpad.net/gcc-arm-embedded/
