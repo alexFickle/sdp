@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include "sdpDefs.h"
 
 #ifndef SDPUTIL_H
 #define SDPUTIL_H
@@ -27,17 +26,5 @@ void buffer2uint(const char *buffer, unsigned int bufferSize, unsigned int *dest
 //uses hex2uint to convert the hex character array buffer to the a uint buffer
 //bufferSize is the number of hex pairs in buffer
 
-struct IndexedBinSet {
-	unsigned int *binSet;
-	unsigned int *binSetIndex;
-};
-//object given to isCardAllowed()
-
-struct IndexedBinSet createIndexedBinSet(unsigned int *binSet, unsigned int *binSetIndex);
-//constructs the object given to isCardAllowed()
-
-unsigned int isCardAllowed(unsigned int card, unsigned int bin, struct IndexedBinSet ibs);
-//determines if the card with sort id card is in the allowed set of bin
-//return of 0 indicates the card is not allowed, 1 indicates it is allowed
 
 #endif

@@ -8,9 +8,10 @@ _ODIR = bin
 _ODIR_ARM = arm_bin
 #c compiler flags:
 _CFLAGS = -Wall -std=c11 -O3
-_CFLAGS_ARM = -Wall -std=c11 -O3 --specs=nosys.specs -mthumb -mcpu=cortex-m0  
+_CFLAGS_ARM = -Wall -std=c11 -O3 --specs=nosys.specs -mthumb -mcpu=cortex-m0
 #the name of all object files included in the main compalation:
-_OBJ = sdpUtil.o binSet.o sdpio.o
+_OBJ_PI = sdpUtil.o binSet.o sdpio.o sdpSort.o
+_OBJ_ARM = 
 
 
 #detects the opperating system
@@ -30,6 +31,7 @@ ifeq ("$(target)","pi")
 CC = $(_CC)
 ODIR = $(_ODIR)
 CFLAGS = $(_CFLAGS)
+_OBJ = $(_OBJ_PI)
 #no hex conversion done
 HEX_CONVERSION = 
 HEX_CLEAN = 
@@ -38,10 +40,12 @@ else
 CC = $(_CC_ARM)
 ODIR = $(_ODIR_ARM)
 CFLAGS = $(_CFLAGS_ARM)
+_OBJ = $(_OBJ_ARM)
 #hex file is the desired output so conversionis done
 HEX_CONVERSION = objcopy  -O ihex $@ $@.hex
 HEX_CLEAN = $(RMprefix) $@ $(RMappend)
 endif
+
 
 #adds the object dirrectory to all object files:
 OBJ = $(patsubst %, $(ODIR)/%,$(_OBJ))

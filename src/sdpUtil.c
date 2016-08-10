@@ -38,41 +38,4 @@ void buffer2uint(const char *buffer, unsigned int bufferSize, unsigned int *dest
 	return;
 }
 
-void createBinSetIndex(const unsigned int *binSet, unsigned int *binSetIndex) {
-	unsigned int offset = 3;
-	for(int i=0; i<binSet[BS_NUM_INTER_BINS]; i++) {
-		binSetIndex[i] = offset;
-		offset += (binSet[offset] + 1);
-	}
-	binSetIndex[binSet[BS_NUM_INTER_BINS]] = binSet[BS_SIZE];
-	return;
-}
 
-struct IndexedBinSet createIndexedBinSet(unsigned int *binSet, unsigned int *binSetIndex) {
-	struct IndexedBinSet ibs;
-	if(binSet == NULL || binSetIndex == NULL || binSet[BS_NUM_INTER_BINS] > BS_MAX_INTER_BINS) {
-		ibs.binSet = (unsigned int *)NULL;
-		ibs.binSetIndex = (unsigned int *)NULL;
-	} else {
-		ibs.binSet = binSet;
-		ibs.binSetIndex = binSetIndex;
-		createBinSetIndex(binSet,binSetIndex);
-	}
-	return ibs;
-}
-
-unsigned int isCardAllowed(unsigned int card, unsigned int bin, struct IndexedBinSet ibs) {
-	unsigned int lowerBound = ibs.binSetIndex[bin];
-	unsigned int upperBound = ibs.binSetIndex[bin + 1];
-	while((lowerBound+1) < upperBound) {
-		unsigned int index = ((upperBound - lowerBound)/2) + lowerBound;
-		if(ibs.binSet[index] > card) {
-			upperBound = index;
-		} else if(ibs.binSet[index] < card) {
-			lowerBound = index;
-		} else {
-			return (unsigned int)1; //card found
-		}
-	}
-	return (unsigned int)0; //card not found
-}

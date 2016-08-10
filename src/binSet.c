@@ -196,7 +196,7 @@ void printBinSet(const unsigned int *binSet) {
 	printf("SET SIZE:  %3u\n",binSet[BS_SIZE]);
 	printf("NUM CARDS: %3u\n",binSet[BS_NUM_CARDS]);
 	printf("NUM BINS:  %3u",binSet[BS_NUM_INTER_BINS]+3);
-	printf("\nBIN0: %2u allowed values: ALL VALUES",binSet[2]);
+	printf("\nBIN0: %2u allowed values: ALL VALUES",binSet[BS_NUM_CARDS]);
 	printf("\nBIN1:  1 allowed values: ERROR VALUE");
 	unsigned int printIndex = 3;
 	unsigned int startOfBinIndex;
@@ -209,7 +209,7 @@ void printBinSet(const unsigned int *binSet) {
 			printIndex ++;
 		}
 	}
-	printf("\nBIN%u: %2u allowed values: ALL VALUES",binSet[BS_NUM_INTER_BINS]+2,binSet[2]);
+	printf("\nBIN%u: %2u allowed values: ALL VALUES",binSet[BS_NUM_INTER_BINS]+2,binSet[BS_NUM_CARDS]);
 	printf("\nEND OF BIN SET PRINT \n\n");
 	return;
 }

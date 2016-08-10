@@ -1,6 +1,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
+#include "sdpDefs.h"
+#include "sdpUtil.h"
+#include "sdpSort.h"
 
 
 #ifndef SDPIO_H
@@ -26,6 +30,20 @@ char *loadBuffer(const char *fileName);
 //returns the char buffer located in the given file
 //returns NULL if the file does not exsist
 //the returned buffer is null terminated
+
+char *loadListOrder(const char *listOrderFile);
+//Loads the desired order of the cards from a file passed by listOrderFile
+//Each element in the list is two characters deliminated by a comma
+//The first characteer is a number 2,...,9 or X(10), J,Q,K,A 
+//The second character is either the letter H,S,C,D which represents the suit
+//returns a nul terminated string
+
+void printListOrder(const char *listOrder);
+//prints the list order, one card(two characters) per line
+//requires listOrder to be nul terminated
+
+void printSortSpace(const struct SortSpace *sortSpace);
+//prints a sort space
 
 
 #endif

@@ -8,8 +8,8 @@
 int main(int argc, char *argv[]) {
 	unsigned int *binSet = constructBinSet(70);
 	unsigned int binSetIndex[BS_MAX_INTER_BINS];
-	struct IndexedBinSet ibs = createIndexedBinSet(binSet,binSetIndex);
-	printList(ibs.binSetIndex,ibs.binSet[BS_NUM_INTER_BINS]+1);
+	struct IndexedBinSet *ibs = createIndexedBinSet(binSet,binSetIndex);
+	printList(ibs->binSetIndex,ibs->binSet[BS_NUM_INTER_BINS]+1);
 	printBinSet(binSet);
 	for(int j=0; j<=5;j++) {
 		for(int i=0;i<70;i++) {
