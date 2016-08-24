@@ -59,7 +59,7 @@
 #define MOTOR_3B_PIN  6
 #define MOTOR_3C_PORT 0   //PIN_23
 #define MOTOR_3C_PIN  7
-#define MOTOR_3D_PORT 2   //PIN_23
+#define MOTOR_3D_PORT 2   //PIN_24
 #define MOTOR_3D_PIN  9
 
 
