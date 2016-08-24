@@ -1,17 +1,27 @@
-#include <stdlib.h>
-#include "sdpDefs.h"
-
 #ifndef SDP_SORT_H
 #define SDP_SORT_H
 
+#include <stdlib.h>
+#include "sdpDefs.h"
+#include "binSet.h"
+
+
+
+
 struct IndexedBinSet {
 	unsigned int *binSet;
-	unsigned int *binSetIndex;
+	unsigned int *index;
 };
 //object given to isCardAllowed()
 
-struct IndexedBinSet *createIndexedBinSet(unsigned int *binSet, unsigned int *binSetIndex);
-//constructs the object given to isCardAllowed()
+struct IndexedBinSet *createIndexedBinSet(unsigned int numCards);
+//constructs the object used in the sorting of the deck
+//to print the binSet: 
+//	struct IndexedBinSet *ibs = createIndexedBinSet(unsigned int numCards);
+//	printBinSet(ibs->binSet);
+
+void deleteIndexedBinSet(struct IndexedBinSet *ibs);
+//frees all of the elements in an Indexed BinSet including the binSet
 
 unsigned int isCardAllowed(unsigned int card, unsigned int bin, const struct IndexedBinSet *ibs);
 //determines if the card with sort id card is in the allowed set of bin
@@ -23,6 +33,8 @@ struct SortSpace {
 	unsigned int *bulk;
 };
 //keeps tract of the location of each card as it is being sorted
+
+#include "sdpio.h"//temp, for dummyCardRead()
 
 struct SortSpace *newSortSpace();
 //creates a SortSpace and resets it so that it is usable
@@ -46,7 +58,7 @@ void placeCard(unsigned int cardID, const struct IndexedBinSet *ibs, struct Sort
 void emptyBin(unsigned int liftedBinNumber, const struct IndexedBinSet *ibs, struct SortSpace* sortSpace);
 void liftBin(unsigned int bin, struct SortSpace *sortSpace);
 
-
+void placeCards(const struct IndexedBinSet *ibs, struct SortSpace *ss);
 
 
 #endif

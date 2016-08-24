@@ -1,3 +1,6 @@
+#ifndef SDPIO_H
+#define SDPIO_H
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -7,8 +10,7 @@
 #include "sdpSort.h"
 
 
-#ifndef SDPIO_H
-#define SDPIO_H
+
 
 void printList(const unsigned int *list, unsigned int listSize);
 //prints a list of unsigned integers of size listSize using printf().  Prints 1 uint per line.

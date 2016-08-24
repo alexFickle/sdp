@@ -7,20 +7,17 @@
 #include <strings.h>
 
 
-
 int main(int argc, char *argv[]) {
 	char *listOrder = loadListOrder("hearts.csv");
 	printListOrder(listOrder);
-	unsigned int *binSet = constructBinSet(52);
-	printBinSet(binSet);
-	unsigned int binSetIndex[BS_MAX_INTER_BINS];
-	struct IndexedBinSet *ibs = createIndexedBinSet(binSet,binSetIndex);
+	struct IndexedBinSet *ibs = createIndexedBinSet(52);
+	printBinSet(ibs->binSet);
 	struct SortSpace *ss = newSortSpace();
-	for(int i = 0; i< 52; i++) {
-		placeCard(i,ibs,ss);
-	}
+	//TODO: send order to lift origin bin
+	placeCards(ibs,ss);
+	//TODO: handle errors in a loop (expose error bin to users, display issues, then placeCards on the error bin, repeat if needed)
 	
-	for(int i = 0; i < binSet[BS_NUM_INTER_BINS]; i++) {
+	for(int i = 0; i < ibs->binSet[BS_NUM_INTER_BINS]; i++) {
 		printf("\n%u :\n",i);
 		liftBin(i,ss);
 		printSortSpace(ss);
@@ -29,8 +26,11 @@ int main(int argc, char *argv[]) {
 		printSortSpace(ss);
 		printf("\n---------------------\n");
 	}
+	deleteSortSpace(ss);
+	deleteIndexedBinSet(ibs);
+	free(listOrder);
 	
-	
+	printf("\ndone!");
 	return 0;
 }
 
