@@ -8,9 +8,10 @@ _ODIR = bin
 _ODIR_ARM = arm_bin
 #c compiler flags:
 _CFLAGS = -Wall -std=c11 -O3
-_CFLAGS_ARM = -Wall -std=c11 -O3 --specs=nosys.specs -mthumb -mcpu=cortex-m0
+_CFLAGS_ARM = -Wall -std=c11 -mcpu=cortex-m0 -mthumb --specs=nosys.specs 
+
 #the name of all object files included in the main compalation:
-_OBJ_PI = sdpUtil.o binSet.o sdpio.o sdpSort.o
+_OBJ_PI = sdpUtil.o binSet.o sdpio.o sdpSort.o 
 _OBJ_ARM = 
 
 
@@ -42,7 +43,7 @@ ODIR = $(_ODIR_ARM)
 CFLAGS = $(_CFLAGS_ARM)
 _OBJ = $(_OBJ_ARM)
 #hex file is the desired output so conversionis done
-HEX_CONVERSION = objcopy  -O ihex $@ $@.hex
+HEX_CONVERSION = objcopy -O ihex --file-alignment 4096 $@ $@.hex
 HEX_CLEAN = $(RMprefix) $@ $(RMappend)
 endif
 
