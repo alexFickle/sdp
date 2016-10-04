@@ -23,7 +23,10 @@ Will be expanded to inculde definitions useful to other parts of the program
 	i.e.: #define BIT1 0x01
 
 sdpPinout.h:
-Contains the pin information of the arm processor.
+Contains the pin information of the arm processor.  Not used by any code currently, just used as a reference.
+
+lpc111x.h:
+Contains information about the lpc1114 register locations.
 
 compilation:
 make: currently compiles test.c (along with any dependencies that need updating)
@@ -34,3 +37,5 @@ make clean: deletes all object files, executables and test text files,
 	see Makefile on directions on how to change it once it is tested.
 "target=arm" can be appended to any command to compile the target into a hex file that can be uploaded
 	to the cortex m0 using arm-none-eabi-gcc from https://launchpad.net/gcc-arm-embedded/
+	arm-none-eabi-gcc must be in your computer's path.  You must also set LINKER_PATH in the Makefile
+	the location of the linker.
