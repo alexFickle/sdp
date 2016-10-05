@@ -80,7 +80,7 @@ endif
 
 
 #edit to change the default target; typing "make" will run this:
-default: test
+default: simSort
 
 #causes "make lib" to work even if there is a file called "lib"
 .PHONY: lib
