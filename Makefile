@@ -2,10 +2,11 @@
 _CC = gcc
 _CC_ARM = arm-none-eabi-gcc
 #directory containing all .h and .c files:
-SDIR = src
+_SDIR = src
+_SDIR_ARM = src_arm
 #directory containing all .o files:
 _ODIR = bin
-_ODIR_ARM = arm_bin
+_ODIR_ARM = bin_arm
 
 #the default interrupts for an ARM program, see init.c
 interrupt = CT16B0_INTERRUPT
@@ -38,6 +39,7 @@ target = arm
 ifeq ("$(target)","pi") 
 CC = $(_CC)
 ODIR = $(_ODIR)
+SDIR = $(_SDIR)
 CFLAGS = $(_CFLAGS)
 _OBJ = $(_OBJ_PI)
 #no hex conversion done
@@ -47,6 +49,7 @@ HEX_CLEAN =
 else
 CC = $(_CC_ARM)
 ODIR = $(_ODIR_ARM)
+SDIR = $(_SDIR_ARM)
 CFLAGS = $(_CFLAGS_ARM)
 _OBJ = $(_OBJ_ARM)
 #hex file is the desired output so conversionis done

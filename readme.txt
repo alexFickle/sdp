@@ -2,6 +2,8 @@ See headerfiles for function declarations and full documentaion
 
 TODO: rewrite this; a lot has changed, but the header file docs are up to date.
 
+PI code:
+
 binSet:
 A binSet is a unsigned integer array that contains all of the information needed to sort a stack of cards.
 binSet.c/.h contains functions used to create (but not use) this binSet
@@ -9,6 +11,9 @@ This code is inteneded to be ran only on the pi.
 The only function that will be needed on the final project is constructBinSet( unsiged integer numCards)
 	which returns an unsigned integer pointer to a binSet for numCards cards
 Also contains printBinSet(unsigned int *binSet) which is used as a debug print
+
+sdpDefs.h:
+Contains definitions used with binSets.
 
 sdpUtil:
 Contains functions used on the pi and/or the arm.
@@ -19,16 +24,16 @@ sdpio:
 Contians print functions used mainly in the debugging of the program.
 Also contains file functions that can be used to save and load binSets or other data
 
-sdpDefs.h:
-Contains definitions used with binSets.
-Will be expanded to inculde definitions useful to other parts of the program
-	i.e.: #define BIT1 0x01
 
-sdpPinout.h:
-Contains the pin information of the arm processor.  Not used by any code currently, just used as a reference.
+
+--------------------------------------------------------------------------------------------------------------
+ARM code:
 
 lpc111x.h:
 Contains information about the lpc1114 register locations.
+
+
+--------------------------------------------------------------------------------------------------------------
 
 compilation:
 make: currently compiles test.c (along with any dependencies that need updating)
