@@ -5,16 +5,16 @@ void uartInit();
 
 
 int main() {
-	GPIO0DIR = BIT2; //LED to show if powered/reset/in ISP mode
-	GPIO0DATA = BIT2; // LED on
+	GPIO2DIR = BIT11; //LED to show if powered/reset/in ISP mode
+	GPIO2DATA = BIT11; // LED on
 	uartInit();
 	while(1){
 		while((U0LSR & BIT0) == 0){}; //wait for new char to be recieved
 		char rxc = U0RBR;
 		if(rxc == 'A') {
-			GPIO0DATA = 0; //off
+			GPIO2DATA = 0; //off
 			for(volatile int i=0; i<1000000; i++){}; //delay
-			GPIO0DATA = BIT2; //on
+			GPIO2DATA = BIT11; //on
 		} else {
 			U0THR = rxc;
 		}

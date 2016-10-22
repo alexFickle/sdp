@@ -5,6 +5,7 @@ void start(void)
 	init();
 }
 void Default_Handler(void);
+extern void timeInterrupt(void);
 
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -49,7 +50,8 @@ const void * Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler ,  	/* C_CAN */
 	Default_Handler, 	/* SSP1 */
 	Default_Handler, 	/* I2C */
-	Default_Handler, 	/* CT16B0 */
+	//Default_Handler, 	/* CT16B0 */
+	timeInterrupt,      /* CT16B0 */
 	Default_Handler, 	/* CT16B1 */
 	Default_Handler, 	/* CT32B0 */
 	Default_Handler, 	/* CT32B1 */
