@@ -5,7 +5,17 @@ void start(void)
 	init();
 }
 void Default_Handler(void);
-extern void timeInterrupt(void);
+
+//if CT16B0_INTERRUPT is defined by passing interrupt=CT16B0_INTERRUPT to the makefile(can be set by default, see the makefile)
+#ifdef CT16B0_INTERRUPT
+extern void ISR_CT16B0(void);
+#undef CT16B0_INTERRUPT //this is to surpress a warning for redefining 
+#define CT16B0_INTERRUPT ISR_CT16B0
+#endif
+#ifndef CT16B0_INTERRUPT
+#define CT16B0_INTERRUPT Default_Handler
+#endif
+extern int main();
 
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -50,8 +60,8 @@ const void * Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler ,  	/* C_CAN */
 	Default_Handler, 	/* SSP1 */
 	Default_Handler, 	/* I2C */
-	//Default_Handler, 	/* CT16B0 */
-	timeInterrupt,      /* CT16B0 */
+	//Default_Handler, 	/* CT16B0 */  
+	CT16B0_INTERRUPT,	/* CT16B0 */
 	Default_Handler, 	/* CT16B1 */
 	Default_Handler, 	/* CT32B0 */
 	Default_Handler, 	/* CT32B1 */

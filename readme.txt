@@ -1,5 +1,7 @@
 See headerfiles for function declarations and full documentaion
 
+TODO: rewrite this; a lot has changed, but the header file docs are up to date.
+
 binSet:
 A binSet is a unsigned integer array that contains all of the information needed to sort a stack of cards.
 binSet.c/.h contains functions used to create (but not use) this binSet
@@ -38,4 +40,14 @@ make clean: deletes all object files, executables and test text files,
 "target=arm" can be appended to any command to compile the target into a hex file that can be uploaded
 	to the cortex m0 using arm-none-eabi-gcc from https://launchpad.net/gcc-arm-embedded/
 	arm-none-eabi-gcc must be in your computer's path.  You must also set LINKER_PATH in the Makefile
-	the location of the linker.
+	the location of lgcc.a; will be something like: ...\GNU Tools ARM Embedded\5.3 2016q1\lib\gcc\arm-none-eabi\5.3.1\armv6-m.
+
+FOR ARM ONLY:
+interrupt="0_INTERRUPT 1_INTERRUPT ..." can be appended to enable any desired interrupts.  This overwrites any default interrupts.
+"interrupt=" can be appended to turn off all interrupts.
+
+sample compilations:
+make 
+make simSort target=pi
+make BlinkArm target=arm interrupt=
+make motorTest target=arm interrupt=CT16B0_INTERRUPT
