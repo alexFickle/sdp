@@ -1,7 +1,6 @@
 See headerfiles for function declarations and full documentaion
 
-TODO: rewrite this; a lot has changed, but the header file docs are up to date.
-
+--------------------------------------------------------------------------------------------------------------
 PI code:
 
 binSet:
@@ -16,43 +15,67 @@ sdpDefs.h:
 Contains definitions used with binSets.
 
 sdpUtil:
-Contains functions used on the pi and/or the arm.
+Contains utility functions used on the pi.
 These functions are used to convert between hex and unsigned integer.
-Also inculdes functions used in the sorting process
+
+sdpSort:
+Contains sort code that uses a binSet to sort the deck of cards.
 
 sdpio:
 Contians print functions used mainly in the debugging of the program.
 Also contains file functions that can be used to save and load binSets or other data
 
 
-
 --------------------------------------------------------------------------------------------------------------
 ARM code:
+
+armUtil:
+Contains functions that initilize periphials and move motors.
+
+init:
+Contains the clock init function and the interrupt vector.
+Interrupts must be declared as extern in this file if they are used
+and their function pointer placed in the vector.
+The extern declaration is handled by the makefile for each interrupt that we have used so far.
+See the interrupt section in the Makefile docuentaion to select which interrrupts are enabled.
+
+linker_script.ld:
+A script used by the linker, do not modify.
 
 lpc111x.h:
 Contains information about the lpc1114 register locations.
 
 
 --------------------------------------------------------------------------------------------------------------
+Makefile:
 
-compilation:
-make: currently compiles test.c (along with any dependencies that need updating)
-make test: compiles test.c along with its dependecies
-make clean: deletes all object files, executables and test text files,
-	on Windows make clean is tested and deletes files.
-	make clean is untested with Linux and currently only displays all files instead of deleting;
-	see Makefile on directions on how to change it once it is tested.
+You can compile a program that contains a main() for both the ARM and PI using this makefile.
+The program being compiled must be in the same directory as the makefile.
+
+Target selection:
 "target=arm" can be appended to any command to compile the target into a hex file that can be uploaded
 	to the cortex m0 using arm-none-eabi-gcc from https://launchpad.net/gcc-arm-embedded/
 	arm-none-eabi-gcc must be in your computer's path.  You must also set LINKER_PATH in the Makefile
-	the location of lgcc.a; will be something like: ...\GNU Tools ARM Embedded\5.3 2016q1\lib\gcc\arm-none-eabi\5.3.1\armv6-m.
+	the location of lgcc.a; will be something like: 
+		...\GNU Tools ARM Embedded\5.3 2016q1\lib\gcc\arm-none-eabi\5.3.1\armv6-m.
+"target=pi" can be used to compile the program for either a raspberry pi or any other computer using gcc.
 
-FOR ARM ONLY:
-interrupt="0_INTERRUPT 1_INTERRUPT ..." can be appended to enable any desired interrupts.  This overwrites any default interrupts.
+Interrupt selection (FOR ARM USE ONLY):
+interrupt="0_INTERRUPT 1_INTERRUPT ..." can be appended to enable any desired interrupts.  
+	This overwrites any default interrupts.
 "interrupt=" can be appended to turn off all interrupts.
 
+The names of interrupts currenty availiable: CT16B0_INTERRUPT
+
+For each " "_INTERRUPT that is eanabled you must write a void ISR_" "(void).
+For example CT16B0_INTERRUPT has a corresponding function void ISR_CT16B0().
+
+
+--------------------------------------------------------------------------------------------------------------
 sample compilations:
 make 
 make simSort target=pi
 make BlinkArm target=arm interrupt=
 make motorTest target=arm interrupt=CT16B0_INTERRUPT
+
+see the Makefile for which program compiles by default.

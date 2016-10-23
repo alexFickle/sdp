@@ -1,9 +1,5 @@
 #include "sdpUtil.h"
 
-//The following functions are used in this file and should not be needed elsewhere:
-void createBinSetIndex(const unsigned int *binSet, unsigned int *binSetIndex);
-//creates an index of max size BS_MAX_INTER_BINS + 1(see sdpDefs.h)
-//constructs the binSetIndex of the IndexedBinSet structure
 
 void uint2hex(unsigned int number, char *destination) {
 	const char *hexDigits = "0123456789ABCDEF";
