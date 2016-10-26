@@ -1,6 +1,6 @@
 See headerfiles for function declarations and full documentaion
 
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 PI code:
 
 binSet:
@@ -26,7 +26,7 @@ Contians print functions used mainly in the debugging of the program.
 Also contains file functions that can be used to save and load binSets or other data
 
 
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 ARM code:
 
 armUtil:
@@ -46,7 +46,7 @@ lpc111x.h:
 Contains information about the lpc1114 register locations.
 
 
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 Makefile:
 
 You can compile a program that contains a main() for both the ARM and PI using this makefile.
@@ -71,7 +71,7 @@ For each " "_INTERRUPT that is eanabled you must write a void ISR_" "(void).
 For example CT16B0_INTERRUPT has a corresponding function void ISR_CT16B0().
 
 
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 sample compilations:
 make 
 make simSort target=pi

@@ -88,18 +88,19 @@ void motor1Init(struct MOTOR *motor) {
 	GPIO0DIR |= (BIT6 | BIT7);
 	GPIO2DIR |= BIT9;
 	GPIO3DIR |= BIT5;
-	motor->A.pin = 5;
+	motor->A.pin = BIT5;
 	motor->A.port = &GPIO3DATA;
-	motor->B.pin = 6;
+	motor->B.pin = BIT6;
 	motor->B.port = &GPIO0DATA;
-	motor->C.pin = 7;
+	motor->C.pin = BIT7;
 	motor->C.port = &GPIO0DATA;
-	motor->D.pin = 9;
+	motor->D.pin = BIT9;
 	motor->D.port = &GPIO2DATA;
-	motor->clock_top = 0;//TODO
-	motor->num_steps = 0;//TODO
-	motor->state = 0;//DONE
+	motor->clock_top = 2182;//~1Hz, test for final freq, will be much higher.
+	motor->num_steps = 800;//test this
+	motor->state = 0;//start with just coil A conducting.
 	setCoil(motor->A);
+	motor->position = 0;
 	return;
 }
 
@@ -107,7 +108,7 @@ void timerInit() {
 	SYSAHBCLKCTRL |= BIT7; //send main clk to CT16B0
 	TMR16B0PR = 2200; //# of clock edges per TC count
 	TMR16B0MCR = BIT0 | BIT1; //both reseting and interrupting on match 0
-	TMR16B0MR0 = 2182; //# that the tc counts up to.
+	TMR16B0MR0 = 21820; //# that the tc counts up to.
 	TMR16B0CCR = 0; //no tc captures
 	TMR16B0CTCR = 0; //timer mode
 	TMR16B0TCR = BIT1; //at the end, rst counter

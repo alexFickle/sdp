@@ -21,8 +21,9 @@ struct MOTOR {
 	struct COIL C;
 	struct COIL D;
 	unsigned int clock_top;
-	unsigned int num_steps;
+	unsigned int num_steps; // # of steps in a full rotation
 	unsigned int state;
+	unsigned int position; //[0 ... num_steps)
 };
 //stucture that represents a 4 phase stepper motor, the coils are driven high in the following pattern:
 /* MOTOR STATES:
@@ -34,6 +35,12 @@ struct MOTOR {
 5: CD
 6: D
 7: DA
+*/
+/* Alternate coil names:
+A: 1+, Black
+B: 2+, Red
+C: 1-, Green
+D: 2-, Blue
 */
 
 void stepMotor(struct MOTOR *motor, int direction);
@@ -51,9 +58,12 @@ void timerInit() ;
 
 void timerStart();
 //starts the timer so that the periodic interrupt fires
+//interrupt frequncy = main_clk / (TMR16B0PR * TMR16B0MR0)
+//the main_clk frequency is currently 48MHz.
 
 void timerStop();
 //stops and zeros the timer to pause the periodic interrupt
+
 
 
 
