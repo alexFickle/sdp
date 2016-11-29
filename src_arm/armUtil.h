@@ -1,5 +1,9 @@
 #include "lpc111x.h"
 
+#ifndef NULL
+#define NULL (void *)0;
+#endif
+
 #ifndef ARM_UTIL_H
 #define ARM_UTIL_H
 
@@ -46,11 +50,17 @@ D: 2-, Blue
 void stepMotor(struct MOTOR *motor, int direction);
 //steps the given motor in the given dirrection by one step
 
-void motorsInit(struct MOTOR *motor1);
+void motorsInit(struct MOTOR *motor1, struct MOTOR *motor2, struct MOTOR *motor3);
 //inits motors 1-3 and the timer used to control the motor step frequency
 
 void motor1Init(struct MOTOR *motor);
-//inits motor1
+//inits motor1, currently wheel motor
+
+void motor2Init(struct MOTOR *motor);
+//inits motor2, currently lift motor
+
+void motor3Init(struct MOTOR *motor);
+//inits motor3, currently dealer motor
 
 void timerInit() ;
 //inits the timer so it can be used to control the motor step frequency
@@ -64,7 +74,16 @@ void timerStart();
 void timerStop();
 //stops and zeros the timer to pause the periodic interrupt
 
+void LED2init();
+//inits LED2 on the board
 
+void LED3init();
+//inits LED3 on the board
+
+void uartInit();
+//inits the UART
+//curently interrupts are not enabled for this
+//TODO
 
 
 

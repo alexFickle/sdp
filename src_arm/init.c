@@ -1,8 +1,8 @@
 #include "lpc111x.h"
-void init(void);
+void __init__(void);
 void start(void)
 {
-	init();
+	__init__();
 }
 void Default_Handler(void);
 
@@ -28,7 +28,7 @@ extern void isr_spi1(void);
 // by the linker script
 const void * Vectors[] __attribute__((section(".vectors"))) ={
 	(void *)0x10002000, 	/* Top of stack */ 
-	init,   		/* Reset Handler */
+	__init__,   		/* Reset Handler */
 	Default_Handler,	/* NMI */
 	Default_Handler,	/* Hard Fault */
 	0,	                /* Reserved */
@@ -78,7 +78,7 @@ const void * Vectors[] __attribute__((section(".vectors"))) ={
 	Default_Handler, 	/* PIO1 */
 	Default_Handler 	/* PIO0 */
 };
-void clock_init()
+void __clock_init__()
 {
 	// This function sets the main clock to the PLL
 	// The PLL input is the built in 12MHz RC oscillator
@@ -92,7 +92,7 @@ void clock_init()
 	MAINCLKSEL = 3; // Use PLL as main clock
 	MAINCLKUEN = 1; // Inform core of clock update
 }
-void init()
+void __init__()
 {
 // do global/static data initialization
 	unsigned char *src;
@@ -108,7 +108,7 @@ void init()
 	len = &BSS_END - &BSS_START;
 	while (len--)
 		*dest++=0;
-	clock_init();
+	__clock_init__();
 	main();
 }
 

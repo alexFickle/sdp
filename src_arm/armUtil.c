@@ -73,10 +73,11 @@ void stepMotor(struct MOTOR *motor, int direction) {
 	return;
 }
 
-void motorsInit(struct MOTOR *motor1) {
+void motorsInit(struct MOTOR *motor1, struct MOTOR *motor2, struct MOTOR *motor3) {
 	timerInit();
-	motor1Init(motor1); //init wheel motor
-	//TODO: init motor 2 and 3
+	motor1Init(motor1);
+	motor2Init(motor2);
+	motor3Init(motor3);
 	return;
 }
 
@@ -104,16 +105,64 @@ void motor1Init(struct MOTOR *motor) {
 	return;
 }
 
+void motor2Init(struct MOTOR *motor) {
+    IOCON_PIO2_1 = 0; //A
+    IOCON_PIO0_3 = 0; //B
+    IOCON_PIO0_4 = 0; //C
+    IOCON_PIO0_5 = 0; //D
+    GPIO0DIR |= (BIT3 | BIT4 | BIT5);
+    GPIO2DIR |= BIT1;
+    motor->A.pin = BIT1;
+    motor->A.port = &GPIO2DATA;
+    motor->B.pin = BIT3;
+    motor->B.port = &GPIO0DATA;
+    motor->C.pin = BIT4;
+    motor->C.port = &GPIO0DATA;
+    motor->D.pin = BIT5;
+    motor->D.port = &GPIO0DATA;
+    motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
+    motor->num_steps = 800;//test this
+    motor->state = 0;//start with just coil A conducting.
+    setCoil(motor->A);
+    motor->position = 0;
+    return;
+}
+
+void motor3Init(struct MOTOR *motor) {
+    IOCON_PIO1_8 = 0; //A
+    IOCON_PIO0_2 = 0; //B
+    IOCON_PIO2_7 = 0; //C
+    IOCON_PIO2_8 = 0; //D
+    GPIO0DIR |= BIT2;
+    GPIO1DIR |= BIT8;
+    GPIO2DIR |= (BIT7 | BIT8);
+    motor->A.pin = BIT8;
+    motor->A.port = &GPIO1DATA;
+    motor->B.pin = BIT2;
+    motor->B.port = &GPIO0DATA;
+    motor->C.pin = BIT7;
+    motor->C.port = &GPIO2DATA;
+    motor->D.pin = BIT8;
+    motor->D.port = &GPIO2DATA;
+    motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
+    motor->num_steps = 800;//test this
+    motor->state = 0;//start with just coil A conducting.
+    setCoil(motor->A);
+    motor->position = 0;
+    return;
+}
+
+
 void timerInit() {
-	SYSAHBCLKCTRL |= BIT7; //send main clk to CT16B0
-	TMR16B0PR = 2200; //# of clock edges per TC count
-	TMR16B0MCR = BIT0 | BIT1; //both reseting and interrupting on match 0
-	TMR16B0MR0 = 21820; //# that the tc counts up to.
-	TMR16B0CCR = 0; //no tc captures
-	TMR16B0CTCR = 0; //timer mode
-	TMR16B0TCR = BIT1; //at the end, rst counter
-	ISER = BIT16;
-	return;
+    SYSAHBCLKCTRL |= BIT7; //send main clk to CT16B0
+    TMR16B0PR = 20; //# of clock edges per TC count
+    TMR16B0MCR = BIT0 | BIT1; //both reseting and interrupting on match 0
+    TMR16B0MR0 = 21820; //# that the tc counts up to.
+    TMR16B0CCR = 0; //no tc captures
+    TMR16B0CTCR = 0; //timer mode
+    TMR16B0TCR = BIT1; //at the end, rst counter
+    ISER = BIT16;
+    return;
 }
 
 void timerStart() {
@@ -123,5 +172,46 @@ void timerStart() {
 
 void timerStop() {
 	TMR16B0TCR = BIT1; //stop and rst the timer
+	return;
+}
+
+//PIO2_11
+void LED2init(){
+	GPIO2DIR |= BIT11; //set output
+	IOCON_PIO2_11 = 0; //set function to GPIO, no pull up/down resistor
+	GPIO2DATA &= ~BIT11; // LED off
+	return;
+}
+
+//PIO0_11
+void LED3init(){
+	SYSAHBCLKCTRL |= (BIT16);
+	GPIO0DIR |= BIT11; //set output
+	IOCON_R_PIO0_11 &= ~0x07;
+	IOCON_R_PIO0_11 |= 0x01;
+	GPIO0DATA |= BIT11; // LED on
+	return;
+}
+
+void uartInit() {
+	
+	SYSAHBCLKCTRL |= BIT16 | BIT6; //clock sent to IO
+	
+	IOCON_PIO1_6 &= ~0x07;
+	IOCON_PIO1_6 |= 0x01; //Rx connected to pin
+	IOCON_PIO1_7 &= ~0x07;
+	IOCON_PIO1_7 |= 0x01; //Tx connected to pin
+	
+	SYSAHBCLKCTRL |= BIT12; //clock sent to UART
+	
+	UARTCLKDIV = 4; //clock has no prescaler
+	
+	U0LCR = 0x83; //8-bit, no parity, DLAB = 1
+	U0DLL = 4; //baudrate
+	U0FDR = 0x85; //115200 baud rate
+	U0DLM = 0; //baudrate
+	U0LCR = 0x03; //set DLAB = 0
+	
+	U0FCR = 0x07; //UART enabled
 	return;
 }
