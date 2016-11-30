@@ -2,12 +2,20 @@
 #include "armUtil.h"
 
 void setCoil(struct COIL coil) {
-	*coil.port |= coil.pin;
+	if(coil.reversedPolarity == 0) {
+		*coil.port |= coil.pin;
+	} else {
+		*coil.port &= ~coil.pin;
+	}
 	return;
 }
 
 void unsetCoil(struct COIL coil) {
-	*coil.port &= ~coil.pin;
+	if(coil.reversedPolarity == 0) {
+		*coil.port &= ~coil.pin;
+	} else {
+		*coil.port |= coil.pin;
+	}
 	return;
 }
 
@@ -100,7 +108,14 @@ void motor1Init(struct MOTOR *motor) {
 	motor->clock_top = 2182;//~1Hz, test for final freq, will be much higher.
 	motor->num_steps = 800;//test this
 	motor->state = 0;//start with just coil A conducting.
+	motor->A.reversedPolarity = 0;
+	motor->B.reversedPolarity = 0;
+	motor->C.reversedPolarity = 0;
+	motor->D.reversedPolarity = 0;
 	setCoil(motor->A);
+	unsetCoil(motor->B);
+	unsetCoil(motor->C);
+	unsetCoil(motor->D);
 	motor->position = 0;
 	return;
 }
@@ -123,8 +138,15 @@ void motor2Init(struct MOTOR *motor) {
     motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
     motor->num_steps = 800;//test this
     motor->state = 0;//start with just coil A conducting.
-    setCoil(motor->A);
-    motor->position = 0;
+    motor->A.reversedPolarity = 0;
+	motor->B.reversedPolarity = 0;
+	motor->C.reversedPolarity = 1;
+	motor->D.reversedPolarity = 1;
+	setCoil(motor->A);
+	unsetCoil(motor->B);
+	unsetCoil(motor->C);
+	unsetCoil(motor->D);
+	motor->position = 0;
     return;
 }
 
@@ -147,8 +169,15 @@ void motor3Init(struct MOTOR *motor) {
     motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
     motor->num_steps = 800;//test this
     motor->state = 0;//start with just coil A conducting.
-    setCoil(motor->A);
-    motor->position = 0;
+    motor->A.reversedPolarity = 0;
+	motor->B.reversedPolarity = 0;
+	motor->C.reversedPolarity = 0;
+	motor->D.reversedPolarity = 0;
+	setCoil(motor->A);
+	unsetCoil(motor->B);
+	unsetCoil(motor->C);
+	unsetCoil(motor->D);
+	motor->position = 0;
     return;
 }
 
@@ -179,7 +208,7 @@ void timerStop() {
 void LED2init(){
 	GPIO2DIR |= BIT11; //set output
 	IOCON_PIO2_11 = 0; //set function to GPIO, no pull up/down resistor
-	GPIO2DATA &= ~BIT11; // LED off
+	GPIO2DATA |= BIT11; // LED on
 	return;
 }
 

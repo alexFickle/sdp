@@ -1,26 +1,29 @@
 #include "lpc111x.h"
 #include "armUtil.h"
 
-struct MOTOR *wheelMotor = NULL;
-struct MOTOR *liftMotor = NULL;
-struct MOTOR *dealerMotor = NULL;
+struct MOTOR wheelMotor,liftMotor,dealerMotor;
 struct MOTOR *movingMotor; //the motor that is currently being moved
+unsigned int flag = 0;
 
 void ISR_CT16B0(void) {
     static unsigned int i = 0;
-    if(i<400) {
+    if(i<200) {
         stepMotor(movingMotor, -1);
         i++;
-    } else if(i < 500){
+    } else if(i < 300){
         i++;
     }
-    else if(i < 900) {
+    else if(i < 500) {
         stepMotor(movingMotor, 1);
         i++;
     }
-    else {
-        i = (i+1) % 1200;
+    else if(i < 900){
+        i++;
     }
+	else{
+		i = 0;
+		flag = (flag+1) % 3;
+	}
 
     TMR16B0IR = BIT0; //rst the interrupt flag
     return;
@@ -28,15 +31,23 @@ void ISR_CT16B0(void) {
 }
 
 void init() {
-	motorsInit(wheelMotor,liftMotor,dealerMotor);
+	motorsInit(&wheelMotor,&liftMotor,&dealerMotor);
 	LED2init();
 	LED3init();
-	uartInit();
+	//uartInit();
 }
 
 int main() {
 	init();
-	timerStart();
-	while(1){} //loop forever
+	movingMotor = &wheelMotor;
+	//timerStart();
+	while(1){
+		while(flag ==0);
+		movingMotor = &dealerMotor;
+		while(flag ==1);
+		movingMotor = &liftMotor;
+		while(flag ==2);
+		movingMotor = &wheelMotor;
+	} //loop forever
 	return 0;
 }

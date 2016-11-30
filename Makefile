@@ -65,7 +65,7 @@ IDIR = -I$(SDIR)
 
 
 #The following is the path to lgcc.a which is used by the linker, will need to be set for each new install
-LINKER_PATH = "C:\Program Files (x86)\GNU Tools ARM Embedded\5.3 2016q1\lib\gcc\arm-none-eabi\5.3.1\armv6-m"
+LINKER_PATH = "C:\Program Files (x86)\GNU Tools ARM Embedded\5.4 2016q3\lib\gcc\arm-none-eabi\5.4.1\armv6-m"
 #when target=arm a linker is used
 ifeq ("$(target)","pi")
 LINK = $(OBJ)

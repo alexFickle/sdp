@@ -75,10 +75,11 @@ void deleteSortSpace(struct SortSpace* sortSpace) {
 	return;
 }
 
+//TODO: ver
 unsigned int cardToPosition(const char card[2], const char *listOrder) {
 	unsigned int position;
-	for(position = 0; position < (sizeof(listOrder)/2);position++) {
-		if(card[0] == listOrder[2*position] && card[1] == listOrder[(2*position) + 1]) {
+	for(position = 0; position < (strlen(listOrder)/2);position++) {
+		if((card[0] == listOrder[2*position]) && (card[1] == listOrder[(2*position) + 1])) {
 			return position;
 		}
 	}

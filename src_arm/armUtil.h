@@ -10,6 +10,7 @@
 struct COIL {
 	unsigned int pin;
 	volatile unsigned int *port;
+	unsigned int reversedPolarity;
 };
 //used in the motor structure, represents a pin GPIO pin on the arm that gets amplified with the ULN2003a
 
