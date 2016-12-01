@@ -1,11 +1,15 @@
 #include "lpc111x.h"
 
 #ifndef NULL
-#define NULL (void *)0;
+#define NULL (void *)0
 #endif
 
 #ifndef ARM_UTIL_H
 #define ARM_UTIL_H
+
+volatile struct MOTOR *movingMotor; //the motor that is currently being moved
+unsigned int stepsToCount;
+int motorDirection;
 
 struct COIL {
 	unsigned int pin;
@@ -48,7 +52,7 @@ C: 1-, Green
 D: 2-, Blue
 */
 
-void stepMotor(struct MOTOR *motor, int direction);
+void stepMotor(volatile struct MOTOR *motor, int direction);
 //steps the given motor in the given dirrection by one step
 
 void motorsInit(struct MOTOR *motor1, struct MOTOR *motor2, struct MOTOR *motor3);
@@ -84,7 +88,17 @@ void LED3init();
 void uartInit();
 //inits the UART
 //curently interrupts are not enabled for this
-//TODO
+//TODO add interrupts
+
+void moveMotor(struct MOTOR *motor,unsigned int steps, int direction);
+//moves a motor
+
+void waitForMotor();
+//delays until a motor is done moving
+
+void haltMotor();
+//stops the motor that is currently being moved
+//used after a button is pressed.
 
 
 

@@ -16,7 +16,7 @@ ARM_INTERRUPT = $(patsubst %, -D%,$(interrupt))
 
 #c compiler flags:
 _CFLAGS = -Wall -std=c11 -O3
-_CFLAGS_ARM = -Wall -mcpu=cortex-m0 -mthumb -g $(ARM_INTERRUPT)
+_CFLAGS_ARM = -Wall -mcpu=cortex-m0 -mthumb -g $(ARM_INTERRUPT) -std=c99
 
 #the name of all object files included in the main compalation:
 _OBJ_PI = sdpUtil.o binSet.o sdpio.o sdpSort.o 
@@ -65,7 +65,7 @@ IDIR = -I$(SDIR)
 
 
 #The following is the path to lgcc.a which is used by the linker, will need to be set for each new install
-LINKER_PATH = "C:\Program Files (x86)\GNU Tools ARM Embedded\5.4 2016q3\lib\gcc\arm-none-eabi\5.4.1\armv6-m"
+LINKER_PATH = "C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m"
 #when target=arm a linker is used
 ifeq ("$(target)","pi")
 LINK = $(OBJ)

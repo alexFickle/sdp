@@ -19,7 +19,7 @@ void unsetCoil(struct COIL coil) {
 	return;
 }
 
-void stepMotor(struct MOTOR *motor, int direction) {
+void stepMotor(volatile struct MOTOR *motor, int direction) {
 	if(direction > 0) {
 		switch(motor->state) {
 			case 0:
@@ -89,6 +89,7 @@ void motorsInit(struct MOTOR *motor1, struct MOTOR *motor2, struct MOTOR *motor3
 	return;
 }
 
+//wheel
 void motor1Init(struct MOTOR *motor) {
 	IOCON_PIO3_5 = 0; //A
 	IOCON_PIO0_6 = 0; //B
@@ -105,7 +106,7 @@ void motor1Init(struct MOTOR *motor) {
 	motor->C.port = &GPIO0DATA;
 	motor->D.pin = BIT9;
 	motor->D.port = &GPIO2DATA;
-	motor->clock_top = 2182;//~1Hz, test for final freq, will be much higher.
+	motor->clock_top = 21820;
 	motor->num_steps = 800;//test this
 	motor->state = 0;//start with just coil A conducting.
 	motor->A.reversedPolarity = 0;
@@ -120,6 +121,7 @@ void motor1Init(struct MOTOR *motor) {
 	return;
 }
 
+//lift
 void motor2Init(struct MOTOR *motor) {
     IOCON_PIO2_1 = 0; //A
     IOCON_PIO0_3 = 0; //B
@@ -135,13 +137,13 @@ void motor2Init(struct MOTOR *motor) {
     motor->C.port = &GPIO0DATA;
     motor->D.pin = BIT5;
     motor->D.port = &GPIO0DATA;
-    motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
+    motor->clock_top = 21820;
     motor->num_steps = 800;//test this
     motor->state = 0;//start with just coil A conducting.
     motor->A.reversedPolarity = 0;
 	motor->B.reversedPolarity = 0;
-	motor->C.reversedPolarity = 1;
-	motor->D.reversedPolarity = 1;
+	motor->C.reversedPolarity = 0;
+	motor->D.reversedPolarity = 0;
 	setCoil(motor->A);
 	unsetCoil(motor->B);
 	unsetCoil(motor->C);
@@ -150,6 +152,7 @@ void motor2Init(struct MOTOR *motor) {
     return;
 }
 
+//dealer
 void motor3Init(struct MOTOR *motor) {
     IOCON_PIO1_8 = 0; //A
     IOCON_PIO0_2 = 0; //B
@@ -166,7 +169,7 @@ void motor3Init(struct MOTOR *motor) {
     motor->C.port = &GPIO2DATA;
     motor->D.pin = BIT8;
     motor->D.port = &GPIO2DATA;
-    motor->clock_top = 218;//~1Hz, test for final freq, will be much higher.
+    motor->clock_top = 5000;
     motor->num_steps = 800;//test this
     motor->state = 0;//start with just coil A conducting.
     motor->A.reversedPolarity = 0;
@@ -212,6 +215,7 @@ void LED2init(){
 	return;
 }
 
+
 //PIO0_11
 void LED3init(){
 	SYSAHBCLKCTRL |= (BIT16);
@@ -241,6 +245,27 @@ void uartInit() {
 	U0DLM = 0; //baudrate
 	U0LCR = 0x03; //set DLAB = 0
 	
+	
 	U0FCR = 0x07; //UART enabled
+	return;
+}
+
+void moveMotor(struct MOTOR *motor,unsigned int steps, int direction) {
+	TMR16B0MR0 = motor->clock_top;
+	stepsToCount = steps;
+	motorDirection = direction;
+	movingMotor = motor;
+	timerStart();
+	return;
+}
+
+void waitForMotor() {
+	while(movingMotor != NULL);
+	return;
+}
+
+void haltMotor() {
+	stepsToCount = 0;
+	movingMotor = NULL;
 	return;
 }
