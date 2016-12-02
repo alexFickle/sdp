@@ -32,7 +32,7 @@ struct MOTOR {
 	unsigned int clock_top;
 	unsigned int num_steps; // # of steps in a full rotation
 	unsigned int state;
-	unsigned int position; //[0 ... num_steps)
+	volatile unsigned int position; //[0 ... num_steps)
 };
 //stucture that represents a 4 phase stepper motor, the coils are driven high in the following pattern:
 /* MOTOR STATES:

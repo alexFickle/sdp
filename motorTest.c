@@ -4,6 +4,7 @@
 
 struct MOTOR wheelMotor,liftMotor,dealerMotor;
 
+
 struct BUTTON{
 	struct COIL power;
 	struct COIL sense;
@@ -59,11 +60,54 @@ void ISR_CT16B0(void) {
 	} else { //step the motor once
 		stepMotor(movingMotor,motorDirection);
 		stepsToCount--;
-		movingMotor->position += motorDirection;
+		if((movingMotor->position == 0) && (motorDirection < 0)) {
+			movingMotor->position = movingMotor->num_steps - 1;
+		} else if((movingMotor->position == movingMotor->num_steps - 1) && (motorDirection > 0)) {
+			movingMotor->position = 0;
+		} else {
+			movingMotor->position += motorDirection;
+		}
+		
 	}
 	TMR16B0IR = BIT0; //rst the interrupt flag
     return;
 }
+
+
+
+void hardDelay(unsigned int centisec) {
+	for(volatile int i = 0; i < centisec; i++) {
+		for(volatile int j = 0; j < 10; j++) {
+			for(volatile int k = 0; k < 20000; k++) {
+			}
+		}
+	}
+}
+
+
+void LED2off() {
+	GPIO2DATA &= ~BIT11; // LED off
+	return;
+}
+
+void LED2on() {
+	GPIO2DATA |= BIT11; // LED on
+	return;
+}
+
+char readCommand() {
+	LED2on();//status LED
+	while((U0LSR & BIT0) == 0){}; //wait for new char to be recieved
+	char cmd = U0RBR;
+	hardDelay(4);
+	U0THR = cmd;
+	//GPIO0DATA ^= BIT11;
+	LED2off();
+	return cmd;
+}
+	
+
+
 
 void init() {
 	motorsInit(&wheelMotor,&liftMotor,&dealerMotor);
@@ -76,58 +120,151 @@ void init() {
 	button2init(&liftDetector);
 }
 
-void hardDelay(unsigned int sec) {
-	for(volatile int i = 0; i < sec; i++) {
-		for(volatile int j = 0; j < 500; j++) {
-			for(volatile int k = 0; k < 20000; k++) {
-			}
-		}
+void moveWheel(struct MOTOR *motor, unsigned int cur, unsigned int desiredPOS) {
+	unsigned int steps;
+	int direction;
+	//U0THR = '0'+ (motor->position / 100); //debug
+	if(cur == desiredPOS) return;
+	if(cur < desiredPOS)  {
+		steps = desiredPOS - cur;
+		direction = 1;
+	} else {
+		steps = cur - desiredPOS;
+		direction = -1;
 	}
-}
-
-void LED2off() {
-	GPIO2DATA &= ~BIT11; // LED off
+	moveMotor(motor,steps,direction);
+	waitForMotor();
+	motor->position = desiredPOS;
 	return;
 }
 
-void LED2on() {
-	GPIO2DATA |= BIT11; // LED on
-	return;
-}
-/*
-unsigned int readCommand() {
-	
-	while((U0LSR & BIT0) == 0){}; //wait for new char to be recieved
-}
-*/
 //wheelMotor,liftMotor,dealerMotor
 //cardDetector,liftDetector;
 int main() {
 	init();
-	moveMotor(&wheelMotor,2,1);
+	LED2off();//this LED indicates if the arm is waiting for a cmd from the pi
+	moveMotor(&wheelMotor,2,1); //home to red tape bin
 	waitForMotor();
-	while(1){
-		while(1) {//loop until break
-			moveMotor(&liftMotor,10000,-1); //lift until button press
+	wheelMotor.position = 300;
+	unsigned int curPos = 300;
+	unsigned int firstGoFlag = 1;
+	while(1) {
+		char cmd = readCommand();
+		switch(cmd) {
+			case ('0'):
+				moveWheel(&wheelMotor,curPos, 200);
+				waitForMotor();
+				curPos = 200;
+				break;
+			case ('1'):
+				moveWheel(&wheelMotor,curPos, 100);
+				waitForMotor();
+				curPos = 100;
+				break;
+			case ('2'):
+				moveWheel(&wheelMotor,curPos, 0);
+				waitForMotor();
+				curPos = 0;
+				break;
+			case ('3'):
+				moveWheel(&wheelMotor,curPos, 300);
+				waitForMotor();
+				curPos = 300;
+				break;
+			/*case '1':
+				moveWheel(&wheelMotor,100);
+				waitForMotor();
+				break;
+			case '2':
+				moveWheel(&wheelMotor,200);
+				waitForMotor();
+				break;
+			case '3':
+				moveWheel(&wheelMotor,300);
+				waitForMotor();
+				break;*/
+			case '4':
+				moveMotor(&wheelMotor,50,1);
+				waitForMotor();
+				curPos = (curPos+50)%400;
+				break;
+			case 'U':
+				moveMotor(&liftMotor,10000,-1); //lift until any button press
+				while(!(pollButton(&cardDetector) || pollButton(&liftDetector)));
+				haltMotor(); //contact!!!
+				unsigned int firstCardInStackFlag = 1;
+				while(1) {//loop until break, until we are out of cards in the lifted bin
+					moveMotor(&liftMotor,10000,-1); //lift until any button press
+					while(!(pollButton(&cardDetector) || pollButton(&liftDetector)));
+					haltMotor(); //contact!!!
+					if(!pollButton(&liftDetector)) { //we have a cards, move it
+						unsigned int cheatFactor = 0;
+						if(firstCardInStackFlag == 1) {
+							cheatFactor = 90;
+							firstCardInStackFlag = 0;
+						} else {
+							cheatFactor = 0;
+						}
+						if(firstGoFlag == 0) {
+							unsigned int c = (unsigned int) (readCommand()-'0');
+							if(c == 4) break; //lift order overrules 
+							unsigned int place = ((c%2 == 1) ? c*100 : ((c+2)%4)*100);
+							
+							moveWheel(&wheelMotor, curPos, place); //move so dest bin is selected
+							waitForMotor();
+							curPos = place;
+						}
+						moveMotor(&dealerMotor,245+cheatFactor,-1);
+						waitForMotor();
+						if(firstGoFlag == 1) {
+							hardDelay(3);
+							char readCmd = readCommand();
+							//if(readCmd != 'P') break;
+						}
+						moveMotor(&liftMotor,20,1);
+						waitForMotor();
+					} else {
+						moveMotor(&dealerMotor,500,-1);
+						firstGoFlag = 0;
+						waitForMotor();
+						break;
+					}
+				}
+				break;
+			case 'D':
+				moveMotor(&liftMotor,liftMotor.num_steps - liftMotor.position, 1); //drop lift
+				waitForMotor();
+				break;
+			}
+		}
+	return 0;
+}
+
+/* //test super loop
+while(1){
+		while(1) {//loop until break, until we are out of cards in the lifted bin
+			moveMotor(&liftMotor,10000,-1); //lift until any button press
 			while(!(pollButton(&cardDetector) || pollButton(&liftDetector)));
 			haltMotor(); //contact!!!
 			if(!pollButton(&liftDetector)) { //we have a cards, move it
-				moveMotor(&dealerMotor,203,-1);
+				moveMotor(&dealerMotor,220,-1);
 				waitForMotor();
-				//moveMotor(&liftMotor,10,1);
+				moveMotor(&liftMotor,20,1);
 				waitForMotor();
 			} else { //no card, drop lift in a safe space
-				moveMotor(&dealerMotor,203,-1);
+				moveMotor(&dealerMotor,500,-1);
 				waitForMotor();
+				hardDelay(1);
 				break;
 			}
 		}
 		moveMotor(&wheelMotor,50,1); //move to a drop zone
 		waitForMotor();
-		moveMotor(&liftMotor,fabs(liftMotor.position), (liftMotor.position > 0) ? 1:-1); //drop lift
+		moveMotor(&liftMotor,liftMotor.num_steps - liftMotor.position, 1); //drop lift
 		waitForMotor();
 		moveMotor(&wheelMotor,50,1); //move to next bin
 		waitForMotor();
 	}
-	return 0;
-}
+
+
+*/

@@ -1,23 +1,9 @@
 Archive member included because of file (symbol)
 
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-                              motorTest.elf (__aeabi_d2uiz)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o) (__aeabi_dsub)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o) (__aeabi_d2iz)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
-                              motorTest.elf (__aeabi_ui2d)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o) (__aeabi_dcmpge)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o) (__clzsi2)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o) (__eqdf2)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o) (__gedf2)
-C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
-                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o) (__ledf2)
+C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+                              motorTest.elf (__aeabi_uidivmod)
+C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
+                              C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 
 Allocating common symbols
 Common symbol       size              file
@@ -46,7 +32,7 @@ LOAD motorTest.elf
 LOAD C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a
                 0x00000000                . = ORIGIN (flash)
 
-.text           0x00000000     0x178c
+.text           0x00000000      0xf70
  *(.vectors)
  .vectors       0x00000000       0xc0 bin_arm/init.o
                 0x00000000                Vectors
@@ -73,104 +59,71 @@ LOAD C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-e
                 0x00000898                moveMotor
                 0x000008dc                waitForMotor
                 0x000008f4                haltMotor
- .text          0x00000914      0x374 motorTest.elf
+ .text          0x00000914      0x5bc motorTest.elf
                 0x00000914                button1init
                 0x00000994                button2init
                 0x00000a1c                pollButton
                 0x00000a40                ISR_CT16B0
-                0x00000aa0                init
-                0x00000afc                hardDelay
-                0x00000b50                LED2off
-                0x00000b70                LED2on
-                0x00000b8c                main
- .text          0x00000c88       0x40 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-                0x00000c88                __aeabi_d2uiz
-                0x00000c88                __fixunsdfsi
- .text          0x00000cc8      0x704 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
-                0x00000cc8                __aeabi_dsub
- .text          0x000013cc       0x68 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
-                0x000013cc                __aeabi_d2iz
- .text          0x00001434       0x64 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
-                0x00001434                __aeabi_ui2d
- .text          0x00001498       0x7c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-                0x00001498                __aeabi_cdrcmple
-                0x000014a8                __aeabi_cdcmple
-                0x000014a8                __aeabi_cdcmpeq
-                0x000014b8                __aeabi_dcmpeq
-                0x000014c4                __aeabi_dcmplt
-                0x000014d8                __aeabi_dcmple
-                0x000014ec                __aeabi_dcmpgt
-                0x00001500                __aeabi_dcmpge
- .text          0x00001514       0x3c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
-                0x00001514                __clzsi2
- .text          0x00001550       0x7c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
-                0x00001550                __nedf2
-                0x00001550                __eqdf2
- .text          0x000015cc       0xe8 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
-                0x000015cc                __gedf2
-                0x000015cc                __gtdf2
- .text          0x000016b4       0xd8 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
-                0x000016b4                __ledf2
-                0x000016b4                __ltdf2
+                0x00000ae8                hardDelay
+                0x00000b38                LED2off
+                0x00000b58                LED2on
+                0x00000b74                readCommand
+                0x00000bb8                init
+                0x00000c14                moveWheel
+                0x00000c74                main
+ .text          0x00000ed0       0x9c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+                0x00000ed0                __aeabi_uidiv
+                0x00000ed0                __udivsi3
+                0x00000f58                __aeabi_uidivmod
+ .text          0x00000f6c        0x4 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
+                0x00000f6c                __aeabi_idiv0
+                0x00000f6c                __aeabi_ldiv0
 
-.glue_7         0x0000178c        0x0
+.glue_7         0x00000f70        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x0000178c        0x0
+.glue_7t        0x00000f70        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x0000178c        0x0
+.vfp11_veneer   0x00000f70        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x0000178c        0x0
+.v4_bx          0x00000f70        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x0000178c        0x0
+.iplt           0x00000f70        0x0
  .iplt          0x00000000        0x0 bin_arm/init.o
 
-.rel.dyn        0x0000178c        0x0
+.rel.dyn        0x00000f70        0x0
  .rel.iplt      0x00000000        0x0 bin_arm/init.o
 
-.rodata         0x0000178c       0x40
- .rodata        0x0000178c       0x40 bin_arm/armUtil.o
+.rodata         0x00000f70       0xd8
+ .rodata        0x00000f70       0x40 bin_arm/armUtil.o
+ .rodata        0x00000fb0       0x98 motorTest.elf
                 0x10000000                . = ORIGIN (ram)
 
-.data           0x10000000        0x0 load address 0x000017cc
-                0x000017cc                INIT_DATA_VALUES = LOADADDR (.data)
+.data           0x10000000        0x0 load address 0x00001048
+                0x00001048                INIT_DATA_VALUES = LOADADDR (.data)
                 0x10000000                INIT_DATA_START = .
  *(.data)
  .data          0x10000000        0x0 bin_arm/init.o
  .data          0x10000000        0x0 bin_arm/armUtil.o
  .data          0x10000000        0x0 motorTest.elf
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
- .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
+ .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+ .data          0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
                 0x10000000                INIT_DATA_END = .
                 0x10000000                BSS_START = .
 
-.igot.plt       0x10000000        0x0 load address 0x000017cc
+.igot.plt       0x10000000        0x0 load address 0x00001048
  .igot.plt      0x00000000        0x0 bin_arm/init.o
 
-.bss            0x10000000       0xfc load address 0x000017cc
+.bss            0x10000000       0xfc load address 0x00001048
  *(.bss)
  .bss           0x10000000        0x0 bin_arm/init.o
  .bss           0x10000000        0x0 bin_arm/armUtil.o
  .bss           0x10000000        0x0 motorTest.elf
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
- .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
+ .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+ .bss           0x10000000        0x0 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
  COMMON         0x10000000        0xc bin_arm/armUtil.o
                 0x10000000                movingMotor
                 0x10000004                motorDirection
@@ -184,20 +137,20 @@ LOAD C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-e
                 0x100000fc                BSS_END = .
 OUTPUT(bin_arm/motorTest.elf elf32-littlearm)
 
-.debug_info     0x00000000      0x808
+.debug_info     0x00000000      0x93c
  .debug_info    0x00000000      0x131 bin_arm/init.o
  .debug_info    0x00000131      0x36a bin_arm/armUtil.o
- .debug_info    0x0000049b      0x36d motorTest.elf
+ .debug_info    0x0000049b      0x4a1 motorTest.elf
 
-.debug_abbrev   0x00000000      0x311
+.debug_abbrev   0x00000000      0x341
  .debug_abbrev  0x00000000       0xdf bin_arm/init.o
  .debug_abbrev  0x000000df       0xe7 bin_arm/armUtil.o
- .debug_abbrev  0x000001c6      0x14b motorTest.elf
+ .debug_abbrev  0x000001c6      0x17b motorTest.elf
 
-.debug_loc      0x00000000      0x598
+.debug_loc      0x00000000      0x614
  .debug_loc     0x00000000       0xbc bin_arm/init.o
  .debug_loc     0x000000bc      0x320 bin_arm/armUtil.o
- .debug_loc     0x000003dc      0x1bc motorTest.elf
+ .debug_loc     0x000003dc      0x238 motorTest.elf
 
 .debug_aranges  0x00000000       0x60
  .debug_aranges
@@ -207,18 +160,18 @@ OUTPUT(bin_arm/motorTest.elf elf32-littlearm)
  .debug_aranges
                 0x00000040       0x20 motorTest.elf
 
-.debug_line     0x00000000      0x28b
+.debug_line     0x00000000      0x2ff
  .debug_line    0x00000000       0x66 bin_arm/init.o
  .debug_line    0x00000066      0x134 bin_arm/armUtil.o
- .debug_line    0x0000019a       0xf1 motorTest.elf
+ .debug_line    0x0000019a      0x165 motorTest.elf
 
-.debug_str      0x00000000      0x344
+.debug_str      0x00000000      0x3b0
  .debug_str     0x00000000      0x107 bin_arm/init.o
                                 0x114 (size before relaxing)
  .debug_str     0x00000107      0x143 bin_arm/armUtil.o
                                 0x1c3 (size before relaxing)
- .debug_str     0x0000024a       0xfa motorTest.elf
-                                0x227 (size before relaxing)
+ .debug_str     0x0000024a      0x166 motorTest.elf
+                                0x2a9 (size before relaxing)
 
 .comment        0x00000000       0x70
  .comment       0x00000000       0x70 bin_arm/init.o
@@ -235,35 +188,18 @@ OUTPUT(bin_arm/motorTest.elf elf32-littlearm)
  .ARM.attributes
                 0x00000062       0x31 motorTest.elf
  .ARM.attributes
-                0x00000093       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
+                0x00000093       0x1e C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x000000bf       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
- .ARM.attributes
-                0x000000eb       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
- .ARM.attributes
-                0x00000117       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
- .ARM.attributes
-                0x00000143       0x1e C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
- .ARM.attributes
-                0x00000161       0x1e C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
- .ARM.attributes
-                0x0000017f       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
- .ARM.attributes
-                0x000001ab       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
- .ARM.attributes
-                0x000001d7       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
+                0x000000b1       0x1e C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
 
-.debug_frame    0x00000000      0x4f4
+.debug_frame    0x00000000      0x3f4
  .debug_frame   0x00000000       0x84 bin_arm/init.o
  .debug_frame   0x00000084      0x1f0 bin_arm/armUtil.o
- .debug_frame   0x00000274      0x120 motorTest.elf
- .debug_frame   0x00000394       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
- .debug_frame   0x000003c0       0x38 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
- .debug_frame   0x000003f8       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
- .debug_frame   0x00000424       0x2c C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
- .debug_frame   0x00000450       0x34 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
- .debug_frame   0x00000484       0x38 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
- .debug_frame   0x000004bc       0x38 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
+ .debug_frame   0x00000274      0x160 motorTest.elf
+ .debug_frame   0x000003d4       0x20 C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+
+.debug_ranges   0x00000000       0x30
+ .debug_ranges  0x00000000       0x30 motorTest.elf
 
 Cross Reference Table
 
@@ -283,38 +219,15 @@ LED2on                                            motorTest.elf
 LED3init                                          bin_arm/armUtil.o
                                                   motorTest.elf
 Vectors                                           bin_arm/init.o
-__aeabi_cdcmpeq                                   C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_cdcmple                                   C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_cdrcmple                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_d2iz                                      C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(fixdfsi.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-__aeabi_d2uiz                                     C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-                                                  motorTest.elf
-__aeabi_dcmpeq                                    C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_dcmpge                                    C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-__aeabi_dcmpgt                                    C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_dcmple                                    C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_dcmplt                                    C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__aeabi_dsub                                      C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-__aeabi_ui2d                                      C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
+__aeabi_idiv0                                     C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
+                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+__aeabi_ldiv0                                     C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_dvmd_tls.o)
+__aeabi_uidiv                                     C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
+__aeabi_uidivmod                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
                                                   motorTest.elf
 __clock_init__                                    bin_arm/init.o
-__clzsi2                                          C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_clzsi2.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(floatunsidf.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(subdf3.o)
-__eqdf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__fixunsdfsi                                      C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_fixunsdfsi.o)
-__gedf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__gtdf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(gedf2.o)
 __init__                                          bin_arm/init.o
-__ledf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
-                                                  C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_arm_cmpdf2.o)
-__ltdf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(ledf2.o)
-__nedf2                                           C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(eqdf2.o)
+__udivsi3                                         C:\Program Files (x86)\GNU Tools ARM Embedded\4.7 2013q3\lib\gcc\arm-none-eabi\4.7.4\armv6-m\libgcc.a(_udivsi3.o)
 button1init                                       motorTest.elf
 button2init                                       motorTest.elf
 cardDetector                                      motorTest.elf
@@ -336,9 +249,11 @@ motorsInit                                        bin_arm/armUtil.o
                                                   motorTest.elf
 moveMotor                                         bin_arm/armUtil.o
                                                   motorTest.elf
+moveWheel                                         motorTest.elf
 movingMotor                                       motorTest.elf
                                                   bin_arm/armUtil.o
 pollButton                                        motorTest.elf
+readCommand                                       motorTest.elf
 setCoil                                           bin_arm/armUtil.o
                                                   motorTest.elf
 start                                             bin_arm/init.o

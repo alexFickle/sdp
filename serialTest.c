@@ -8,17 +8,25 @@ int main() {
 	GPIO2DIR = BIT11; //LED to show if powered/reset/in ISP mode
 	GPIO2DATA = BIT11; // LED on
 	uartInit();
+	char rxc;
+	// while(1){
+		// while((U0LSR & BIT0) == 0){}; //wait for new char to be recieved
+		// char rxc = U0RBR;
+		// if(rxc == 'A') {
+			// GPIO2DATA = 0; //off
+			// for(volatile int i=0; i<1000000; i++){}; //delay
+			// GPIO2DATA = BIT11; //on
+		// } else {
+			// U0THR = rxc;
+		// }
+	// }
 	while(1){
 		while((U0LSR & BIT0) == 0){}; //wait for new char to be recieved
-		char rxc = U0RBR;
-		if(rxc == 'A') {
-			GPIO2DATA = 0; //off
-			for(volatile int i=0; i<1000000; i++){}; //delay
-			GPIO2DATA = BIT11; //on
-		} else {
-			U0THR = rxc;
-		}
+		rxc = U0RBR;
+		GPIO2DATA ^= BIT11;
+		U0THR = rxc;	
 	}
+		
 	return 0;
 }
 

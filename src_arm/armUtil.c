@@ -107,7 +107,7 @@ void motor1Init(struct MOTOR *motor) {
 	motor->D.pin = BIT9;
 	motor->D.port = &GPIO2DATA;
 	motor->clock_top = 21820;
-	motor->num_steps = 800;//test this
+	motor->num_steps = 400;//test this
 	motor->state = 0;//start with just coil A conducting.
 	motor->A.reversedPolarity = 0;
 	motor->B.reversedPolarity = 0;
@@ -137,7 +137,7 @@ void motor2Init(struct MOTOR *motor) {
     motor->C.port = &GPIO0DATA;
     motor->D.pin = BIT5;
     motor->D.port = &GPIO0DATA;
-    motor->clock_top = 21820;
+    motor->clock_top = 21000;
     motor->num_steps = 800;//test this
     motor->state = 0;//start with just coil A conducting.
     motor->A.reversedPolarity = 0;
